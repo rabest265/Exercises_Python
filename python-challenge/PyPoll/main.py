@@ -1,11 +1,7 @@
-#* You will be give a set of poll data called [election_data.csv](PyPoll/Resources/election_data.csv). 
-# The dataset is composed of three columns: `Voter ID`, `County`, and `Candidate`. 
-# Your task is to create a Python script that analyzes the votes and calculates each of the following:
-
 import os
 import csv
 
-# Call in the CSV file budget_data.csv and store the output path
+# Call in the CSV file election_data.csv and store the output path
 csvpath = os.path.join("..", "Instructions", "election_data.csv")
 output_path = os.path.join("poll_results.txt")
 
@@ -16,7 +12,7 @@ candidatecount =[]
 largest = 0
 
 #Open the file and read the header in csv reader
-with open(csvpath, newline='') as csvfile:
+with open (csvpath, newline='') as csvfile:
     csvreader = csv.reader(csvfile, delimiter=',')
     csv_header = next(csvreader)
     # Go through each row of data
@@ -24,7 +20,7 @@ with open(csvpath, newline='') as csvfile:
         candidate =  row[2]
         # Calculate the total number of votes
         totalvotes = totalvotes + 1
-        # add value to count if candidate is already there otherwise add them
+        # add value to count if candidate is already there otherwise add them to the list
         if candidate in candidatelist:
             candidatecount[candidatelist.index (candidate)] += 1
         else:
@@ -32,12 +28,7 @@ with open(csvpath, newline='') as csvfile:
             candidatecount.append (1)
 
     
-# Calculate the total number of votes
-#  * A complete list of candidates who received votes
-#  * The percentage of votes each candidate won
-#  * The total number of votes each candidate won
-#  * The winner of the election based on popular vote.
-
+    
 
 #Write an output file with requested information
     file = open(output_path,"w")
@@ -45,11 +36,13 @@ with open(csvpath, newline='') as csvfile:
     file.write("----------------------------------------\n")
     file.write("Total Votes: " + str(totalvotes) + "\n")
     file.write("----------------------------------------\n")
+    #  list each cabdidate, the percentage and total number of votes
     for name in candidatelist:
         count = candidatecount[candidatelist.index (name)]
-        pct = round(count /totalvotes * 100,3)
+        pct = round(count /totalvotes * 100,5)
         file.write(name + ":  " + str(pct) + "% (" + str(count) + ")\n")
-        if count > largest:
+    # Calculate the winner of the election based on popular vote.
+    if count > largest:
             largest = count
             Winner = name
     file.write("----------------------------------------\n")
