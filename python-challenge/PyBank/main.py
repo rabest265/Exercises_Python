@@ -1,62 +1,58 @@
-# Unit 3 | Assignment - Py Me Up, Charlie
+import os
+import csv
 
-## PyBank
+# Call in the CSV file budget_data.csv and store the output path
+csvpath = os.path.join("..", "Instructions", "budget_data.csv")
+output_path = os.path.join("budget_output.txt")
 
-# In this challenge, you are tasked with creating a Python script for analyzing the financial records of your company. 
-# You will give a set of financial data called [budget_data.csv]. 
-# #The dataset is composed of two columns: `Date` and `Profit/Losses`. 
-# (Thankfully, your company has rather lax standards for accounting so the records are simple.)
+#Set counting variables to 0 to start
+totalpandl = 0
+totalmonths = 0
+totalchange = 0
+lastpandl = 0
+largest = 0
+smallest = 0
 
-# Call in the CSV file budget_dat.csv
+#Open the file and read the header in csv reader
+with open(csvpath, newline='') as csvfile:
+    csvreader = csv.reader(csvfile, delimiter=',')
+    csv_header = next(csvreader)
+    # Go through each row of data
+    for row in csvreader:
+        date =  row[0]
+        pandl = int(row[1])
+        # Calculate the total number of months included in the dataset
+        totalmonths = totalmonths + 1
+        # Calculate the net total amount of "Profit/Losses" over the entire period        
+        totalpandl = totalpandl + pandl
+        # Calculate the changes in "Profit/Losses" after the first instance
+        if totalmonths != 1:
+            change = pandl - lastpandl
+            totalchange = totalchange + change
+            # Calculate the greatest increase in profits (date and amount) over the entire period
+            if change > largest:
+                largest = change
+                largestmonth = date
+            # Calculate the greatest decrease in losses (date and amount) over the entire period
+            if change < smallest:
+                smallest = change
+                smallestmonth = date
+        #set up the last profit/loss value
+        lastpandl = pandl    
 
-#  Calculate and print the total number of months included in the dataset
-
-#  Calculate and print the net total amount of "Profit/Losses" over the entire period
-
-#   Calculate and print the average of the changes in "Profit/Losses" over the entire period
-
-#   Calculate and print the greatest increase in profits (date and amount) over the entire period
-
-#   Calculate and print the greatest decrease in losses (date and amount) over the entire period
-
-
-# As an example, your analysis should look similar to the one below:
-#  ```text
-#  Financial Analysis
-#  ----------------------------
-#  Total Months: 86
-#  Total: $38382578
-#  Average  Change: $-2315.12
-#  Greatest Increase in Profits: Feb-2012 ($1926159)
-#  Greatest Decrease in Profits: Sep-2013 ($-2196167)
-#  ```
-
-#* In addition, your final script should both print the analysis to the terminal and export a text file with the results.
-
-## Hints and Considerations
-
-#* Consider what we've learned so far. To date, we've learned how to import modules like `csv`; 
-# # to read and write files in various formats; to store contents in variables, lists, and dictionaries; 
-# # to iterate through basic data structures; and to debug along the way. 
-#* As you will discover, for some of these challenges, the datasets are quite large. 
-# This was done purposefully, as it showcases one of the limits of Excel-based analysis. 
-# While our first instinct, as data analysts, is often to head straight into Excel, 
-# creating scripts in Python can provide us with more robust options for handling "big data".
-
-#* Your scripts should work for each dataset provided. 
-# Run your script for each dataset separately to make sure that the code works for different data.
-
-#* Feel encouraged to work in groups, but don't shortchange yourself by copying someone else's work. 
-# You get what you put in, and the art of programming is extremely unforgiving to moochers. 
-# Dig your heels in, burn the night oil, and learn this while you can! 
-# These are skills that will pay dividends in your future career.
-
-#* Start early, and reach out for help often! 
-# Challenge yourself to identify _specific_ questions for your instructors and TAs. 
-# Don't resign yourself to simply saying, "I'm totally lost." 
-# Come prepared to show your effort and thought patterns, we'll be happy to help along the way.
-
-#* Always commit your work and back it up with GitHub pushes. 
-# You don't want to lose hours of your work because you didn't push it to GitHub every half hour or so.
-
-#  * **Commit often**.
+    #Write an output file with requested information
+    file = open(output_path,"w")
+    file.write("Financial Analysis\n")
+    file.write("----------------------------------------\n")
+    file.write("Total number of months are: " + str(totalmonths) + "\n")
+    file.write("Total Profit/Losses over the period are: $" + str(totalpandl) + "\n")
+    file.write("Total average change in Profit/Loss is: $" + str(round(totalchange / (totalmonths - 1),2)) + "\n")
+    file.write("The greatest increase in profits happened in " + largestmonth + " for $" + str(largest) + "\n")
+    file.write("The greatest decrease in losses happened in " + smallestmonth + " for $" + str(smallest) + "\n")
+    file.write("----------------------------------------")
+    file.close()
+    
+    #Print the file in terminal
+    file = open(output_path,"r")
+    print (file.read())
+    file.close
