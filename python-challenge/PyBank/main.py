@@ -22,13 +22,13 @@ with open(csvpath, newline='') as csvfile:
         date =  row[0]
         pandl = int(row[1])
         # Calculate the total number of months included in the dataset
-        totalmonths = totalmonths + 1
+        totalmonths += 1
         # Calculate the net total amount of "Profit/Losses" over the entire period        
-        totalpandl = totalpandl + pandl
+        totalpandl += pandl
         # Calculate the changes in "Profit/Losses" after the first instance
         if totalmonths != 1:
             change = pandl - lastpandl
-            totalchange = totalchange + change
+            totalchange += change
             # Calculate the greatest increase in profits (date and amount) over the entire period
             if change > largest:
                 largest = change

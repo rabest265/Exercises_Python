@@ -39,7 +39,7 @@ with open (csvpath, newline='') as csvfile:
     #  list each cabdidate, the percentage and total number of votes
     for name in candidatelist:
         count = candidatecount[candidatelist.index (name)]
-        pct = round(count /totalvotes * 100,5)
+        pct = round(count /totalvotes * 100,2)
         file.write(name + ":  " + str(pct) + "% (" + str(count) + ")\n")
     # Calculate the winner of the election based on popular vote.
     if count > largest:
