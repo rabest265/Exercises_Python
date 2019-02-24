@@ -2,7 +2,7 @@ import os
 import csv
 
 # Call in the CSV file budget_data.csv and store the output path
-csvpath = os.path.join("..", "Instructions", "budget_data.csv")
+csvpath = os.path.join("..", "Resources", "budget_data.csv")
 output_path = os.path.join("budget_output.txt")
 
 #Set counting variables to 0 to start

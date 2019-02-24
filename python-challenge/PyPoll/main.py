@@ -2,7 +2,7 @@ import os
 import csv
 
 # Call in the CSV file election_data.csv and store the output path
-csvpath = os.path.join("..", "Instructions", "election_data.csv")
+csvpath = os.path.join("..", "Resources", "election_data.csv")
 output_path = os.path.join("poll_results.txt")
 
 #Set counting variables to 0 to start
