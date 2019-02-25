@@ -20,7 +20,7 @@ with open(csvpath, newline='') as csvfile:
     # Go through each row of data
     for row in csvreader:
         date =  row[0]
-        pandl = int(row[1])
+        pandl = float(row[1])
         # Calculate the total number of months included in the dataset
         totalmonths += 1
         # Calculate the net total amount of "Profit/Losses" over the entire period        
