@@ -42,9 +42,10 @@ with open (csvpath, newline='') as csvfile:
         pct = round(count /totalvotes * 100,2)
         file.write(name + ":  " + str(pct) + "% (" + str(count) + ")\n")
     # Calculate the winner of the election based on popular vote.
-    if count > largest:
-            largest = count
+        if pct > largest:
+            largest = pct
             Winner = name
+        
     file.write("----------------------------------------\n")
     file.write("Winner:  " + Winner + "\n")
     file.write("----------------------------------------")
