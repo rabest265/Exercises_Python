@@ -1,5 +1,5 @@
 # Projects
 
-* This folder contains an assortment of projects I have worked on.
+* This folder contains an assortment of projects I have worked on related to Python.
 
-* It includes: Excel, VBA, Python, Jupyter Notebook, Pandas, numpy, and Matplotlib
+* It includes: Python, Jupyter Notebook, Pandas, numpy, and Matplotlib, and APIs
